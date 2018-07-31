@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using CameraRotationSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +15,12 @@ class UserInput : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		if(Input.GetButton(KeyBindingsData.EnableCameraRotation))
+		if(Input.GetButton("RMB"))
 		{
 			CameraBehaviour.ChangeAngle();
 		}
 
-		if(Input.GetAxis(KeyBindingsData.zAxis) != 0)
+		if(Input.GetAxis("Mouse ScrollWheel") != 0)
 		{
 			CameraBehaviour.ChangeDistance();
 		}

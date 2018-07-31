@@ -1,62 +1,33 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 class Transmission
 {
-	
-
-	public Vector3 _aim;
-	public Vector3 Aim
-	{
-		get
-		{
-			return _aim;
-		}
-		set
-		{
-			_aim = value;
-			Engine.MoveToAim(this);
-		}
-	}
-	public bool isMoving;
-	public bool aimed;
-
+	float accelerationTime = .2f;
+	float timeStep = .1f;
 	public float speed;
 	public float acceleration;
 
-	public Transmission(MotionAccess motionAccess)
+	public static UpdatePosition
+
+	public void MeasureSpeed(Transmission transmission)
 	{
-		unit = motionAccess.unit;
-		this.motionAccess = motionAccess;
+		transmission.speed = Mathf.SmoothDamp(transmission.speed, GetSpeedMultiplyer(transmission), ref transmission.acceleration, accelerationTime);
 	}
 
-	public void ProcessDispatcherReport(bool isMassMove)
+	public float GetSpeedMultiplyer(Transmission transmission)
 	{
-		MoveInfo moveInfo = Dispatcher.Instance.Report(unit.transform.position);
-		Transform what = moveInfo.hittedTransform;
-		Vector3 where = moveInfo.hittedPoint;
-		bool isUnit = moveInfo.isUnit;
+		float remainingDistance = 0;
 
-		if(isUnit)
+		if(remainingDistance > 2f)
 		{
-			Target = moveInfo.hittedTransform;
+			return 1f;
 		}
-		else
+		if(remainingDistance < .01f)
 		{
-			aimed = false;
-			if(isMassMove)
-			{
-				Aim = NavigationTools.HandleMassMove(unit, moveInfo.hittedPoint);
-			}
-			else
-			{
-				Aim = moveInfo.hittedPoint;
-			}
+			return 0;
 		}
-	}
 
-	public void Work()
-	{
-		// remake all coroutins to transmission system
+		return .1f;
 	}
 }

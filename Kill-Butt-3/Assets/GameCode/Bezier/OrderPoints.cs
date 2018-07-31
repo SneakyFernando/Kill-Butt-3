@@ -2,56 +2,6 @@
 
 class OrderPoints
 {
-	public static Vector3[] GetPointsForConnection(Connection connection, Vector2 size)
-	{
-		Node A = connection.fromNeuron.node;
-		Node B = connection.toNeuron.node;
-		Transform aDoor = connection.fromDoor.structure.t;
-		Transform bDoor = connection.toDoor.structure.t;
-		float d = Sizes.BuildingParameters.d;
-		
-		Vector3[] mainPs = new Vector3[4];
-		mainPs[0] = DoorHelper.A(connection.fromDoor,size) + aDoor.right * d * (.0f + 1)/* - aDoor.forward * d * .1f*/ - aDoor.up * 1f * d;//ugly hack for door to corridor aligning
-		mainPs[3] = DoorHelper.B(connection.toDoor, size) - bDoor.right * d * (.0f + 1f) /*- bDoor.forward * d * .1f*/ - bDoor.up * 1f * d;
-
-		//float yDeltaDistr = B.yDistribution - A.yDistribution;
-		//float yM = yDeltaDistr * Map.C;
-
-		float yDeltaDistr = B.yDistribution - A.yDistribution;
-		float yRadians =  yDeltaDistr*Mathf.PI/2;
-		float n = 2*Mathf.PI / yRadians;
-		float l =( (float)4 / 3) * Mathf.Tan(Mathf.PI / (2 * n)) * Map.R;
-
-		//mainPs[1] = mainPs[0] + aDoor.forward * (Sizes.Map.entrConnectionL + yM / 3);
-		//mainPs[2] = mainPs[3] + bDoor.forward * (Sizes.Map.entrConnectionL + yM / 3);
-		mainPs[1] = mainPs[0] + aDoor.forward * l;
-		mainPs[2] = mainPs[3] + bDoor.forward * l;
-
-		return mainPs;
-	}
-
-	public static Vector3[][] GetAligningPoints(Connection connection)
-	{
-		Vector3[][] aligningPs = new Vector3[2][];
-		aligningPs[0] = new Vector3[4];
-		aligningPs[1] = new Vector3[4];
-
-		Vector3 A = DoorHelper.A(connection.fromDoor);
-
-		aligningPs[0][0] = Vector3.zero;
-		aligningPs[0][1] = DoorHelper.B(connection.fromDoor) - A;
-		aligningPs[0][2] = DoorHelper.C(connection.fromDoor) - A;
-		aligningPs[0][3] = DoorHelper.D(connection.fromDoor) - A;
-
-		A = DoorHelper.B(connection.toDoor);
-		aligningPs[1][0] = Vector3.zero;
-		aligningPs[1][1] = DoorHelper.A(connection.toDoor) - A;
-		aligningPs[1][2] = DoorHelper.D(connection.toDoor) - A;
-		aligningPs[1][3] = DoorHelper.C(connection.toDoor) - A;
-
-		return aligningPs;
-	}
-
 	public static Vector3[] BuildRandomized(Curve curve)
 	{
 		int OPsN = curve.orderPointsAmount;

@@ -287,24 +287,16 @@
     <Compile Include="Assets\GameCode\Bezier\Curve.cs" />
     <Compile Include="Assets\GameCode\Bezier\OrderPoints.cs" />
     <Compile Include="Assets\GameCode\Bezier\PointsFiller.cs" />
-    <Compile Include="Assets\GameCode\CameraMechanics\CameraBehaviour.cs" />
-    <Compile Include="Assets\GameCode\CameraMechanics\CameraRotationSystem\CameraObserver.cs" />
-    <Compile Include="Assets\GameCode\CameraMechanics\CameraRotationSystem\CameraRotationInterface.cs" />
-    <Compile Include="Assets\GameCode\CameraMechanics\CameraRotationSystem\CameraRotator.cs" />
-    <Compile Include="Assets\GameCode\CameraMechanics\CameraRotationSystem\CameraShifter.cs" />
-    <Compile Include="Assets\GameCode\CameraMechanics\CorridorCheck.cs" />
-    <Compile Include="Assets\GameCode\CameraMechanics\CameraSettings.cs" />
+    <Compile Include="Assets\GameCode\Targeting\Dispatcher.cs" />
+    <Compile Include="Assets\GameCode\Unit\King.cs" />
+    <Compile Include="Assets\GameCode\Unit\Pawn.cs" />
+    <Compile Include="Assets\GameCode\Unit\Queen.cs" />
+    <Compile Include="Assets\GameCode\UserInput\CameraBehaviour.cs" />
     <Compile Include="Assets\GameCode\Navigation\Field.cs" />
     <Compile Include="Assets\GameCode\Unit\Unit.cs" />
-    <Compile Include="Assets\GameCode\UserInput\Input\KeyBindingsData.cs" />
     <Compile Include="Assets\GameCode\StaticData\LayersData.cs" />
-    <Compile Include="Assets\GameCode\StaticData\Sizes.cs" />
-    <Compile Include="Assets\GameCode\StaticData\TagsData.cs" />
-    <Compile Include="Assets\GameCode\CameraMechanics\SphericalCoordinates.cs" />
-    <Compile Include="Assets\GameCode\UserInput\Input\UserInput.cs" />
-    <Compile Include="Assets\GameCode\Navigation\Engine.cs" />
-    <Compile Include="Assets\GameCode\Navigation\Speedometer.cs" />
     <Compile Include="Assets\GameCode\Navigation\Transmission.cs" />
+    <Compile Include="Assets\GameCode\UserInput\UserInput.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
