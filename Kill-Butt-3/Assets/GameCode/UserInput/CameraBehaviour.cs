@@ -2,7 +2,7 @@
 
 class CameraBehaviour : MonoBehaviour
 {
-	public static float r = 128;
+	public static float r = 64;
 	public static float phi = 64;
 	public static float theta = 64;
 	public static float phiAxisSpeed = 5;
@@ -13,6 +13,13 @@ class CameraBehaviour : MonoBehaviour
 	public static float thethaMax = 179;
 	public static float rMin = .5f;
 	public static float rMax = float.MaxValue;
+
+	public static Camera camera;
+
+	private void Start()
+	{
+		camera = GetComponent<Camera>();
+	}
 
 	private void LateUpdate()
 	{

@@ -10,7 +10,26 @@ class UserInput : MonoBehaviour
 
 	private void Update()
 	{
-		
+		if(Input.GetButton("LMB"))
+		{
+			Ray m = CameraBehaviour.camera.ScreenPointToRay(Input.mousePosition);
+
+			if(Physics.Raycast(m.origin, m.direction , out hit, 1000))
+			{
+				if(hit.transform.tag == "Cell")
+				{
+					if(Dispatcher.selectedAlly)
+					{
+						Dispatcher.selectedAlly.Move(hit.transform.position);
+					}
+				}
+
+				if(hit.transform.tag == "Unit")
+				{
+					Dispatcher.selectedAlly = hit.transform.GetComponent<Unit>();
+				}				
+			} 
+		}
 	}
 
 	private void LateUpdate()

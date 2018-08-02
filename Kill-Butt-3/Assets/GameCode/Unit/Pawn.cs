@@ -13,9 +13,9 @@ class Pawn : Unit
 		onego.Push(transform.forward);
 		onego.Push(transform.forward);
 		Stack<Vector3> doublego = new Stack<Vector3>();
-		onego.Push(transform.forward);
-		onego.Push(transform.forward);
-		onego.Push(transform.forward);
+		doublego.Push(transform.forward);
+		doublego.Push(transform.forward);
+		doublego.Push(transform.forward*2);
 
 		moveSet.Add(onego);
 		moveSet.Add(doublego);

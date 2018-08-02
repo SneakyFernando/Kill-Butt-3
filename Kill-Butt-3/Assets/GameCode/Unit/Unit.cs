@@ -15,11 +15,28 @@ class Unit : MonoBehaviour
 	Vector3 nextAim;
 	bool isSubMoving;
 	Stack<Vector3> chosenMove;
-	float timeForSubMove;
 	bool isOnFirstSubMove;
+	float t;
+	float timeForSubMove = 1;
 
-	public void Move(Vector3 delta)
+	public Vector3 pos
 	{
+		get
+		{
+			return transform.parent.position;
+		}
+		set
+		{
+			transform.parent.position = value;
+		}
+	}
+
+	public void Move(Vector3 position)
+	{
+		position.y = 0;
+		Vector3 deltaNotPrecise = (position - pos) / Field.fieldCellL;
+		Vector3 delta = new Vector3(Mathf.RoundToInt(deltaNotPrecise.x), 0, Mathf.RoundToInt(deltaNotPrecise.z));
+
 		if(isMoving)
 		{
 			return;
@@ -31,7 +48,7 @@ class Unit : MonoBehaviour
 			{
 				isMoving = true;
 				chosenMove = new Stack<Vector3>(new Stack<Vector3>(move));
-				finalAim = chosenMove.Pop() * Field.fieldCellL + transform.position;
+				finalAim = chosenMove.Pop() * Field.fieldCellL + pos;
 				isOnFirstSubMove = true;
 
 				return;
@@ -39,54 +56,49 @@ class Unit : MonoBehaviour
 		}
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		if(isMoving)
 		{
 			if(!isSubMoving)
 			{
-				nextAim = chosenMove.Pop() * Field.fieldCellL + transform.position;
-				previousAim = transform.position;
+				t = 0;
+				isSubMoving = true;
+				nextAim = chosenMove.Pop() * Field.fieldCellL + pos;
+				previousAim = pos;
 			}
 
-			if(finalAim == transform.position)
-			{
-				isMoving = false;
-				return;
-			}
-
-			float rad0, rad1;
+			t += Time.fixedDeltaTime;
+			float t1 = t;
 
 			if(isOnFirstSubMove)
 			{
-				rad0 = 0;
-			}
-			else
-			{
-				rad0 = Mathf.PI / 2;
+				t1 = (float)Math.Sin(t * Math.PI / 2);
 			}
 
 			if(chosenMove.Count==0)
 			{
-				rad1 = Mathf.PI;
-			}
-			else
-			{
-				rad1 = Mathf.PI / 2;
-			}
 
-			transform.position = NatureLerp(previousAim, nextAim, (nextAim - previousAim).magnitude / Field.fieldCellL, rad0, rad1);
+				t1 = (float)Math.Sin(t * Math.PI / 2);
+			}
+			 
+			pos = NatureLerp(previousAim, nextAim, t1);
 
-			if(nextAim == transform.position)
+			if(t > timeForSubMove)
 			{
 				isSubMoving = false;
 				isOnFirstSubMove = false;
+
+				if(chosenMove.Count == 0)
+				{
+					isMoving = false;
+				}
 			}
 		}
 	}
 
-	Vector3 NatureLerp(Vector3 A, Vector3 B, float t, float rad0, float rad1)
+	Vector3 NatureLerp(Vector3 A, Vector3 B, float t)
 	{
-		return Vector3.Lerp(A, B, (float)Math.Sin((t * rad1 + rad0)));
+		return Vector3.Lerp(A, B, t);
 	}
 }

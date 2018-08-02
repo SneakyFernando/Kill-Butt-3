@@ -17,5 +17,21 @@ class LayersData
 			return 1 << Unit;
 		}
 	}
+
+	public static int Cell
+	{
+		get
+		{
+			return LayerMask.NameToLayer("Cell");
+		}
+	}
+
+	public static LayerMask CellMask
+	{
+		get
+		{
+			return 1 << Cell;
+		}
+	}
 }
 

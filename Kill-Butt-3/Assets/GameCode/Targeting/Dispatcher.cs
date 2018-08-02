@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-class Dispatcher
+class Dispatcher : MonoBehaviour
 {
 	public static Unit selectedAlly;
-	public static Unit selectedEnemy;
+
+	private void Update()
+	{
+			
+	}
 }

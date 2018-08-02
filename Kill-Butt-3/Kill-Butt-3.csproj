@@ -295,7 +295,6 @@
     <Compile Include="Assets\GameCode\Navigation\Field.cs" />
     <Compile Include="Assets\GameCode\Unit\Unit.cs" />
     <Compile Include="Assets\GameCode\StaticData\LayersData.cs" />
-    <Compile Include="Assets\GameCode\Navigation\Transmission.cs" />
     <Compile Include="Assets\GameCode\UserInput\UserInput.cs" />
   </ItemGroup>
   <ItemGroup />
