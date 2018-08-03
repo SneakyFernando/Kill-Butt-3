@@ -23,11 +23,11 @@ class Unit : MonoBehaviour
 	{
 		get
 		{
-			return transform.parent.position;
+			return transform.position;
 		}
 		set
 		{
-			transform.parent.position = value;
+			transform.position = value;
 		}
 	}
 
@@ -35,7 +35,7 @@ class Unit : MonoBehaviour
 	{
 		position.y = 0;
 		Vector3 deltaNotPrecise = (position - pos) / Field.fieldCellL;
-		Vector3 delta = new Vector3(Mathf.RoundToInt(deltaNotPrecise.x), 0, Mathf.RoundToInt(deltaNotPrecise.z));
+		Vector3 delta = Dispatcher.Snap(deltaNotPrecise);
 
 		if(isMoving)
 		{
@@ -43,8 +43,15 @@ class Unit : MonoBehaviour
 		}
 
 		foreach(Stack<Vector3> move in moveSet)
-		{
-			if(delta == move.Peek())
+		{	
+			if(!Dispatcher.IsWayEmpty(move, pos))
+			{
+				continue;
+			}
+
+			Vector3 checkPos = move.Peek();
+
+			if(delta == checkPos)
 			{
 				isMoving = true;
 				chosenMove = new Stack<Vector3>(new Stack<Vector3>(move));
@@ -71,17 +78,17 @@ class Unit : MonoBehaviour
 			t += Time.fixedDeltaTime;
 			float t1 = t;
 
-			if(isOnFirstSubMove)
-			{
-				t1 = (float)Math.Sin(t * Math.PI / 2);
-			}
+			//if(isOnFirstSubMove)
+			//{
+			//	t1 = (float)Math.Sin(t * Math.PI / 2);
+			//}
 
-			if(chosenMove.Count==0)
-			{
+			//if(chosenMove.Count == 0)
+			//{
 
-				t1 = (float)Math.Sin(t * Math.PI / 2);
-			}
-			 
+			//	t1 = (float)Math.Sin(t * Math.PI / 2);
+			//}
+
 			pos = NatureLerp(previousAim, nextAim, t1);
 
 			if(t > timeForSubMove)
