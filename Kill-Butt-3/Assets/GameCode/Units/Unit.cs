@@ -8,6 +8,9 @@ class Unit : MonoBehaviour
 {
 	public bool isMoving;
 
+	public float m = 1;
+	public float c = 1000;
+
 	protected List<Stack<Vector3>> moveSet;
 
 	Vector3 finalAim;
