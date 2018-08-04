@@ -20,7 +20,7 @@ class UserInput : MonoBehaviour
 				{
 					if(Dispatcher.selectedAlly)
 					{
-						Dispatcher.selectedAlly.Move(hit.transform.position);
+						Dispatcher.selectedAlly.SetAim(hit.transform.position);
 					}
 				}
 

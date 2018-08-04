@@ -5,8 +5,10 @@ using UnityEngine;
 
 class Rock : Unit
 {
-	private void Start()
+	protected override void Init()
 	{
+		base.Init();
+
 		moveSet = new List<Stack<Vector3>>();
 
 		for(int i = 0; i < 4; i++)
@@ -28,5 +30,7 @@ class Rock : Unit
 				moveSet.Add(move);
 			}
 		}
+
+		attackSet = new List<Stack<Vector3>>(moveSet);
 	}
 }

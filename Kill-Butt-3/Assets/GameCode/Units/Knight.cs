@@ -6,8 +6,10 @@ using UnityEngine;
 
 class Knight : Unit
 {
-	private void Start()
+	protected override void Init()
 	{
+		base.Init();
+
 		moveSet = new List<Stack<Vector3>>();
 
 		for(int i = 0; i < 4; i++)
@@ -87,5 +89,7 @@ class Knight : Unit
 
 			moveSet.Add(move);
 		}
+
+		attackSet = new List<Stack<Vector3>>(moveSet);
 	}
 }

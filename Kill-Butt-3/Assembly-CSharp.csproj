@@ -64,10 +64,15 @@
     <Compile Include="Assets\GameCode\Bezier\Curve.cs" />
     <Compile Include="Assets\GameCode\Bezier\OrderPoints.cs" />
     <Compile Include="Assets\GameCode\Bezier\PointsFiller.cs" />
+    <Compile Include="Assets\GameCode\CombatSystem\Connection.cs" />
     <Compile Include="Assets\GameCode\CombatSystem\Equalizer.cs" />
+    <Compile Include="Assets\GameCode\CombatSystem\Thermometer.cs" />
+    <Compile Include="Assets\GameCode\FlowParticles\FlowBridge.cs" />
+    <Compile Include="Assets\GameCode\FlowParticles\FlowController.cs" />
     <Compile Include="Assets\GameCode\GameController\GameController.cs" />
     <Compile Include="Assets\GameCode\Navigation\Dispatcher.cs" />
     <Compile Include="Assets\GameCode\Navigation\Field.cs" />
+    <Compile Include="Assets\GameCode\Navigation\Rugby.cs" />
     <Compile Include="Assets\GameCode\StaticData\LayersData.cs" />
     <Compile Include="Assets\GameCode\Units\Bishop.cs" />
     <Compile Include="Assets\GameCode\Units\King.cs" />
@@ -79,11 +84,11 @@
     <Compile Include="Assets\GameCode\UserInput\CameraBehaviour.cs" />
     <Compile Include="Assets\GameCode\UserInput\NewBehaviourScript.cs" />
     <Compile Include="Assets\GameCode\UserInput\UserInput.cs" />
-    <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
-    <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs" />
-    <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\rotation.cs" />
-    <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
-    <None Include="Assets\Particle Ribbon by Moonflower Carnivore\readme_Simple_Particle_Ribbon.txt" />
+    <Compile Include="Assets\Particles\Scripts\randomParticleRotation.cs" />
+    <Compile Include="Assets\Particles\Scripts\ReverseNormals.cs" />
+    <Compile Include="Assets\Particles\Scripts\rotation.cs" />
+    <None Include="Assets\Particles\Shaders\Particle Alpha Blend HDR.shader" />
+    <None Include="Assets\Particles\readme_Simple_Particle_Ribbon.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/chosen-stream/Kill-Butt-3/Kill-Butt-3/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

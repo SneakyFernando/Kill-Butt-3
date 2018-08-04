@@ -2,7 +2,7 @@
 
 class CameraBehaviour : MonoBehaviour
 {
-	public static float r = 64;
+	public static float r = 7;
 	public static float phi = 64;
 	public static float theta = 64;
 	public static float phiAxisSpeed = 5;
@@ -15,6 +15,7 @@ class CameraBehaviour : MonoBehaviour
 	public static float rMax = float.MaxValue;
 
 	public static Camera camera;
+	public Transform target;
 
 	private void Start()
 	{
@@ -28,7 +29,7 @@ class CameraBehaviour : MonoBehaviour
 
 	public static void ChangeDistance()
 	{
-		 r = Mathf.Clamp(r - Input.GetAxis("Mouse ScrollWheel") * rAxisSpeed, rMin, rMax);
+		r = Mathf.Clamp(r - Input.GetAxis("Mouse ScrollWheel") * rAxisSpeed, rMin, rMax);
 	}
 
 	public static void ChangeAngle()
@@ -42,8 +43,8 @@ class CameraBehaviour : MonoBehaviour
 
 	void RefreshTransform()
 	{
-		transform.position = HeilSphericalCoordinateSystem(theta, phi, r);
-		transform.rotation = Quaternion.LookRotation(-transform.position);
+		transform.position = HeilSphericalCoordinateSystem(theta, phi, r) + target.position;
+		transform.rotation = Quaternion.LookRotation(target.position - transform.position);
 	}
 
 	public static Vector3 HeilSphericalCoordinateSystem(float Theta, float Phi, float r)

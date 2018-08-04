@@ -16,10 +16,12 @@ class Equalizer : MonoBehaviour
 		{
 			foreach(Unit b in GameController.units)
 			{
-				if(true)
+				if(a == b)
 				{
-
+					continue;
 				}
+
+
 			}
 		}
 	}

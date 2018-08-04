@@ -5,8 +5,10 @@ using UnityEngine;
 
 class King : Unit
 {
-	private void Start()
+	protected override void Init()
 	{
+		base.Init();
+
 		moveSet = new List<Stack<Vector3>>();
 
 		for(int i = 0; i < 8; i++)
@@ -19,6 +21,8 @@ class King : Unit
 
 			moveSet.Add(move);
 		}
+
+		attackSet = new List<Stack<Vector3>>(moveSet);
 	}
 }
 

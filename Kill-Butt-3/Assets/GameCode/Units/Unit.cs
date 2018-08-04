@@ -6,12 +6,16 @@ using System.Linq;
 
 class Unit : MonoBehaviour
 {
+	public bool isEnemy;
+
 	public bool isMoving;
 
 	public float m = 1;
-	public float c = 1000;
+	public float c = 4200;
+	public float T = 1000;
 
-	protected List<Stack<Vector3>> moveSet;
+	public List<Stack<Vector3>> moveSet;
+	public Vector2 gridPos;
 
 	Vector3 finalAim;
 	Vector3 previousAim;
@@ -21,6 +25,8 @@ class Unit : MonoBehaviour
 	bool isOnFirstSubMove;
 	float t;
 	float timeForSubMove = 1;
+
+	Thermometer thermometer;
 
 	public Vector3 pos
 	{
@@ -34,16 +40,39 @@ class Unit : MonoBehaviour
 		}
 	}
 
-	public void Move(Vector3 position)
+	private void Start()
 	{
-		position.y = 0;
-		Vector3 deltaNotPrecise = (position - pos) / Field.fieldCellL;
-		Vector3 delta = Dispatcher.Snap(deltaNotPrecise);
+		Init();
+		moveSet.Sort((m1, m2) => m1.Count.CompareTo(m2));
+		thermometer = new Thermometer(this);
+	}
 
+	private void Update()
+	{
+		thermometer.Adjust(T);
+	}
+
+	private void FixedUpdate()
+	{
+		Move();
+	}
+
+	protected virtual void Init()
+	{
+		gridPos = new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z));
+		Field.grid[(int)gridPos.x, (int)gridPos.y] = this;
+	}
+
+	public void SetAim(Vector3 position)
+	{
 		if(isMoving)
 		{
 			return;
 		}
+
+		position.y = 0;
+		Vector3 deltaNotPrecise = position - pos;
+		Vector3 delta = Dispatcher.Snap(deltaNotPrecise);
 
 		foreach(Stack<Vector3> move in moveSet)
 		{	
@@ -58,7 +87,7 @@ class Unit : MonoBehaviour
 			{
 				isMoving = true;
 				chosenMove = new Stack<Vector3>(new Stack<Vector3>(move));
-				finalAim = chosenMove.Pop() * Field.fieldCellL + pos;
+				finalAim = chosenMove.Pop() + pos;
 				isOnFirstSubMove = true;
 
 				return;
@@ -66,7 +95,7 @@ class Unit : MonoBehaviour
 		}
 	}
 
-	private void FixedUpdate()
+	void Move()
 	{
 		if(isMoving)
 		{
@@ -74,7 +103,7 @@ class Unit : MonoBehaviour
 			{
 				t = 0;
 				isSubMoving = true;
-				nextAim = chosenMove.Pop() * Field.fieldCellL + pos;
+				nextAim = chosenMove.Pop() + pos;
 				previousAim = pos;
 			}
 
@@ -92,7 +121,7 @@ class Unit : MonoBehaviour
 			//	t1 = (float)Math.Sin(t * Math.PI / 2);
 			//}
 
-			pos = NatureLerp(previousAim, nextAim, t1);
+			pos = Vector3.Lerp(previousAim, nextAim, t1);
 
 			if(t > timeForSubMove)
 			{
@@ -104,11 +133,22 @@ class Unit : MonoBehaviour
 					isMoving = false;
 				}
 			}
+
+			CheckForPositionSwap();
 		}
 	}
 
-	Vector3 NatureLerp(Vector3 A, Vector3 B, float t)
+	void CheckForPositionSwap()
 	{
-		return Vector3.Lerp(A, B, t);
+		if((pos-nextAim).sqrMagnitude > (pos-previousAim).sqrMagnitude)
+		{
+			Field.Set(null, previousAim);
+			Field.Set(this, nextAim);
+		}
+	}
+
+	public virtual List<Unit> GetUnderAttack()
+	{
+		return null;
 	}
 }

@@ -5,11 +5,13 @@ using UnityEngine;
 
 class Bishop : Unit
 {
-	private void Start()
+	protected override void Init()
 	{
+		base.Init();
+
 		moveSet = new List<Stack<Vector3>>();
 
-		for(int i = 1; i < 9; i+=2)
+		for(int i = 1; i < 9; i += 2)
 		{
 			for(int j = 1; j < 9; j++)
 			{
@@ -28,5 +30,7 @@ class Bishop : Unit
 				moveSet.Add(move);
 			}
 		}
+
+		attackSet = new List<Stack<Vector3>>(moveSet);		
 	}
 }
