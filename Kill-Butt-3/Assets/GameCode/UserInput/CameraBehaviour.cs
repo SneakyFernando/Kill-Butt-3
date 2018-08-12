@@ -2,17 +2,17 @@
 
 class CameraBehaviour : MonoBehaviour
 {
-	public static float r = 7;
-	public static float phi = 64;
+	public static float r = 10;
+	public static float phi = 164;
 	public static float theta = 64;
 	public static float phiAxisSpeed = 5;
 	public static float thetaAxisSpeed = 5;
-	public static float rAxisSpeed = 20;
+	public static float rAxisSpeed = 8;
 
 	public static float thethaMin = 1;
-	public static float thethaMax = 179;
+	public static float thethaMax = 90;
 	public static float rMin = .5f;
-	public static float rMax = float.MaxValue;
+	public static float rMax = 24;
 
 	public static Camera camera;
 	public Transform target;

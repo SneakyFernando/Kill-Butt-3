@@ -17,17 +17,21 @@ public class Curve
 		this.pointsAmount = pointsAmount;
 		this.maxRadius = maxRadius;
 		this.randomizeVector = randomizeVector;
-
-		Recompute();
 	}
 
-	public void Recompute()
+	public void RecomputeRandomized()
 	{
 		if(orderPoints == null)
 		{
 			orderPoints = OrderPoints.BuildRandomized(this);
 		}
 
+		points = PointsFiller.Fill(orderPoints, order, pointsAmount);
+	}
+
+	public void RecomputeWithOrderPoints(Vector3[] orderPoints)
+	{
+		this.orderPoints = orderPoints;
 		points = PointsFiller.Fill(orderPoints, order, pointsAmount);
 	}
 }

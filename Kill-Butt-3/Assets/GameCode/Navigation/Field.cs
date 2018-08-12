@@ -4,26 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-class Field : MonoBehaviour
+static class Field
 {
-	public static int N = 8;
+	public static int Nx = 8;
+	public static int Ny = 16;
 
-	public static Unit[,] grid;
+	public static MoveComponent[,] grid = new MoveComponent[Nx, Ny];
 
-	private void Start()
-	{
-		grid = new Unit[N, N];
-	}
-
-	public static Unit Get(Vector3 pos)
+	public static MoveComponent Get(Vector3 pos)
 	{
 		return grid[Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z)];
 	}
 
-	public static void Set(Unit unit, Vector3 pos)
+	public static void Set(MoveComponent unit, Vector3 pos)
 	{
-		unit.gridPos.x = Mathf.RoundToInt(pos.x);
-		unit.gridPos.y = Mathf.RoundToInt(pos.z);
-		grid[(int)unit.gridPos.x, (int)unit.gridPos.y] = unit;
+		int x = Mathf.RoundToInt(pos.x);
+		int y = Mathf.RoundToInt(pos.z);
+
+		if(unit != null)
+		{
+			unit.gridPos.x = x;
+			unit.gridPos.y = y;
+		}
+
+		grid[x, y] = unit;
 	}
 }

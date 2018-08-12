@@ -5,30 +5,43 @@ using System.Linq;
 
 class UserInput : MonoBehaviour
 {
+	Unit selectedUnit;
 	RaycastHit hit;
 	Ray ray;
 
 	private void Update()
 	{
-		if(Input.GetButton("LMB"))
+		if(Input.GetButtonDown("LMB") || Input.GetButtonUp("LMB"))
 		{
-			Ray m = CameraBehaviour.camera.ScreenPointToRay(Input.mousePosition);
+			ray = CameraBehaviour.camera.ScreenPointToRay(Input.mousePosition);
 
-			if(Physics.Raycast(m.origin, m.direction , out hit, 1000))
+			if(Physics.Raycast(ray, out hit, 1000))
 			{
 				if(hit.transform.tag == "Cell")
 				{
-					if(Dispatcher.selectedAlly)
+					if(Input.GetButtonDown("LMB"))
 					{
-						Dispatcher.selectedAlly.SetAim(hit.transform.position);
+						MoveComponent occupiedMoveComp = Field.Get(hit.transform.position);
+
+						if(!occupiedMoveComp)
+						{
+							return;
+						}
+
+						Unit hitedUnit = occupiedMoveComp.unit;
+
+						if(selectedUnit != hitedUnit)
+						{
+							selectedUnit = hitedUnit;
+						}
+					}
+					else if(Input.GetButtonUp("LMB") && selectedUnit!= null)
+					{
+						selectedUnit.Move.SetAim(hit.transform.position);
+						selectedUnit = null;
 					}
 				}
-
-				if(hit.transform.tag == "Unit")
-				{
-					Dispatcher.selectedAlly = hit.transform.GetComponent<Unit>();
-				}				
-			} 
+			}
 		}
 	}
 
