@@ -1,21 +1,52 @@
 fileFormatVersion: 2
-guid: d31a045603c590744ab068a587611fd1
+guid: 60c7f85342e8faa40a453c44181dd438
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Pyramid001
-    100004: Pyramid002
-    400000: //RootNode
-    400002: Pyramid001
-    400004: Pyramid002
-    2100000: No Name
-    2300000: Pyramid001
-    2300002: Pyramid002
-    3300000: Pyramid001
-    3300002: Pyramid002
-    4300000: Pyramid001
-    4300002: Pyramid002
+    100000: Object008
+    100002: Object009
+    100004: Object010
+    100006: Object011
+    100008: Object012
+    100010: Object013
+    100012: Object014
+    100014: Object015
+    100016: //RootNode
+    400000: Object008
+    400002: Object009
+    400004: Object010
+    400006: Object011
+    400008: Object012
+    400010: Object013
+    400012: Object014
+    400014: Object015
+    400016: //RootNode
+    2100000: wire_214229166
+    2300000: Object008
+    2300002: Object009
+    2300004: Object010
+    2300006: Object011
+    2300008: Object012
+    2300010: Object013
+    2300012: Object014
+    2300014: Object015
+    3300000: Object008
+    3300002: Object009
+    3300004: Object010
+    3300006: Object011
+    3300008: Object012
+    3300010: Object013
+    3300012: Object014
+    3300014: Object015
+    4300000: Object008
+    4300002: Object009
+    4300004: Object010
+    4300006: Object011
+    4300008: Object012
+    4300010: Object013
+    4300012: Object014
+    4300014: Object015
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -47,7 +78,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 2
+    globalScale: 0.04
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
